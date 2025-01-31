@@ -57,6 +57,10 @@ func ErrorForbidden(err any) HttpError {
 	return newError(err, http.StatusForbidden)
 }
 
+func ErrorMethodNotAllowed() HttpError {
+	return newError("Method Not Allowed", http.StatusMethodNotAllowed)
+}
+
 func ErrorNotAcceptable(err any) HttpError {
 	return newError(err, http.StatusNotAcceptable)
 }

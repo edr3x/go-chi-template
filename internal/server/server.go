@@ -54,7 +54,12 @@ func (s *server) NewHandler() http.Handler {
 
 	// 404 Handler
 	app.NotFound(func(w http.ResponseWriter, r *http.Request) {
-		res.Error(w, r, entities.ErrorNotFound("NotFound"))
+		res.Error(w, r, entities.ErrorNotFound("Route Not Found"))
+	})
+
+	// Method Not Allowed
+	app.MethodNotAllowed(func(w http.ResponseWriter, r *http.Request) {
+		res.Error(w, r, entities.ErrorMethodNotAllowed())
 	})
 
 	return app

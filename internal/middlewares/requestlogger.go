@@ -26,13 +26,15 @@ func ZapLoggerMiddleware(logger *zap.Logger) func(next http.Handler) http.Handle
 			next.ServeHTTP(rw, r)
 			duration := time.Since(start)
 
-			logger.Info("Request",
-				zap.String("Method", r.Method),
-				zap.String("Path", r.URL.Path),
-				zap.String("Remote", r.RemoteAddr),
-				zap.Int("Status", rw.statusCode),
-				zap.Duration("Duration", duration),
-			)
+			if rw.statusCode < 400 {
+				logger.Info("Request Completed",
+					zap.String("Method", r.Method),
+					zap.String("Path", r.URL.Path),
+					zap.String("Remote", r.RemoteAddr),
+					zap.Int("Status", rw.statusCode),
+					zap.Duration("Duration", duration),
+				)
+			}
 		}
 		return http.HandlerFunc(fn)
 	}
