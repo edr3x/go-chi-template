@@ -9,6 +9,9 @@ type responders struct {
 	logger *zap.Logger
 }
 
-func NewResponders(logger *zap.Logger) interfaces.Responders {
-	return &responders{logger: logger}
+func NewResponders() interfaces.Responders {
+	return &responders{
+		// disablle caller here as we do not need it from global handler
+		logger: zap.L().WithOptions(zap.WithCaller(false)),
+	}
 }

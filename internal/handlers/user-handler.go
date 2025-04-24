@@ -20,7 +20,7 @@ func NewUserHandler() *UserHandler {
 	return &UserHandler{
 		svc:    services.NewUserService(),
 		logger: zap.L().Named("UserHandler"),
-		res:    responders.NewResponders(zap.L()),
+		res:    responders.NewResponders(),
 	}
 }
 

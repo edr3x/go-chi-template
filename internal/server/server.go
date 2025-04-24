@@ -6,7 +6,6 @@ import (
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
 	"github.com/go-chi/cors"
-	"go.uber.org/zap"
 
 	"github.com/edr3x/chi-template/internal/entities"
 	"github.com/edr3x/chi-template/internal/middlewares"
@@ -23,10 +22,10 @@ func NewServer() *server {
 func (s *server) NewHandler() http.Handler {
 	app := chi.NewRouter()
 
-	res := responders.NewResponders(zap.L())
+	res := responders.NewResponders()
 
 	// Middlewares
-	app.Use(middlewares.ZapLoggerMiddleware(zap.L()))
+	app.Use(middlewares.ZapLoggerMiddleware())
 	app.Use(middleware.CleanPath)
 	app.Use(middleware.RequestID)
 

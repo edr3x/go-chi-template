@@ -1,6 +1,6 @@
 module github.com/edr3x/chi-template
 
-go 1.20
+go 1.24
 
 require (
 	github.com/go-chi/chi/v5 v5.2.0

@@ -20,7 +20,7 @@ func NewAuthHandler() *AuthHandler {
 	return &AuthHandler{
 		svc:    services.NewAuthService(),
 		logger: zap.L().Named("AuthHandler"),
-		res:    responders.NewResponders(zap.L()),
+		res:    responders.NewResponders(),
 	}
 }
 

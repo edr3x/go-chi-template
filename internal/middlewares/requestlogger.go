@@ -17,7 +17,7 @@ func (rw *responseWriter) WriteHeader(code int) {
 	rw.ResponseWriter.WriteHeader(code)
 }
 
-func ZapLoggerMiddleware(logger *zap.Logger) func(next http.Handler) http.Handler {
+func ZapLoggerMiddleware() func(next http.Handler) http.Handler {
 	return func(next http.Handler) http.Handler {
 		fn := func(w http.ResponseWriter, r *http.Request) {
 			start := time.Now()
@@ -27,7 +27,7 @@ func ZapLoggerMiddleware(logger *zap.Logger) func(next http.Handler) http.Handle
 			duration := time.Since(start)
 
 			if rw.statusCode < 400 {
-				logger.Info("Request Completed",
+				zap.L().WithOptions(zap.WithCaller(false)).Info("Request Completed",
 					zap.String("Method", r.Method),
 					zap.String("Path", r.URL.Path),
 					zap.String("Remote", r.RemoteAddr),
